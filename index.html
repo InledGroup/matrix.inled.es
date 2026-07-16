@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join us on Matrix - Inled Group</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: url('https://hosted.inled.es/better.inled.png') no-repeat center center fixed;
+            background-size: cover;
+            padding: 20px;
+        }
+
+        .glass-card {
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 48px 40px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            margin-bottom: 8px;
+        }
+
+        .logo img {
+            height: 64px;
+            width: auto;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px 24px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.95);
+            color: #1a1a2e;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 12px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-element {
+            background: rgba(8, 170, 42, 0.25);
+            color: #fff;
+            border: 1px solid rgba(8, 170, 42, 0.4);
+            margin-top: 12px;
+        }
+
+        .btn-element:hover {
+            background: rgba(8, 170, 42, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .element-dropdown {
+            margin-top: 12px;
+            position: relative;
+        }
+
+        .element-dropdown-btn {
+            width: 100%;
+            padding: 14px 24px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            background: rgba(8, 170, 42, 0.25);
+            color: #fff;
+            border: 1px solid rgba(8, 170, 42, 0.4);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.25s ease;
+        }
+
+        .element-dropdown-btn:hover {
+            background: rgba(8, 170, 42, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .element-dropdown-btn img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .element-dropdown-btn .chevron {
+            margin-left: auto;
+            width: 14px;
+            height: 14px;
+            transition: transform 0.25s ease;
+        }
+
+        .element-dropdown.open .chevron {
+            transform: rotate(180deg);
+        }
+
+        .element-dropdown-options {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, margin 0.3s ease;
+            margin-top: 0;
+        }
+
+        .element-dropdown.open .element-dropdown-options {
+            max-height: 140px;
+            margin-top: 8px;
+        }
+
+        .element-dropdown-options a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s ease;
+            margin-bottom: 6px;
+        }
+
+        .element-dropdown-options a:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .element-dropdown-options a:last-child {
+            margin-bottom: 0;
+        }
+
+        .element-dropdown-options a img {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .element-dropdown-options a span {
+            flex: 1;
+            text-align: left;
+        }
+
+        .element-dropdown-options a small {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .btn svg, .btn img {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+
+        .btn-primary svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .btn img {
+            object-fit: contain;
+        }
+
+        .divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.12);
+            margin: 28px 0;
+        }
+
+        .notice {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: left;
+        }
+
+        .notice-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .notice-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.6;
+        }
+
+        .notice-text a {
+            color: #fff;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .notice-text a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        @media (max-width: 520px) {
+            .glass-card {
+                padding: 36px 24px;
+                border-radius: 20px;
+            }
+
+            .title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glass-card">
+        <div class="logo"><img src="https://hosted.inled.es/INLED_simple-removebg-preview.png" alt="Inled Logo"></div>
+        <h1 class="title">Inled Matrix</h1>
+        <p class="subtitle">Do you use Inled projects, do you want to collaborate or participate in the community? Welcome! We develop for Linux, web (client-side) and ai, with focus on privacy and experiments</p>
+
+        <a href="https://matrix.to/#/#inledgroup:matrix.org" target="_blank" rel="noopener" class="btn btn-primary">
+            <svg viewBox="0 0 512 512" fill="currentColor"><path d="M61.6 27l-32.9 0 0 458 32.9 0 0 11-45.6 0 0-480 45.6 0 0 11zM496 496l-45.6 0 0-11 32.9 0 0-458-32.9 0 0-11 45.6 0 0 480zM324.1 167.6c9 0 17.4 1.1 25.2 3.3s14.3 5.7 19.8 10.6 9.8 11.2 12.9 19c3 7.8 4.6 17.3 4.6 28.3l0 114.5-47 0 0-97c0-5.7-.2-11.2-.6-16.3s-1.7-9.5-3.6-13.2c-2-3.8-4.9-6.8-8.7-9s-9.1-3.3-15.7-3.3c-6.6 0-12 1.3-16.1 3.8-4.1 2.6-7.3 5.8-9.6 10-2.3 4.1-3.9 8.7-4.6 13.9-.7 5.2-1.2 10.4-1.2 15.7l0 95.3-47 0 0-96c0-5.1-.1-10.1-.4-15-.2-5-1.2-9.5-2.9-13.8-1.7-4.1-4.4-7.6-8.3-10.1s-9.5-3.8-17.1-3.8c-2.2 0-5.2 .5-8.8 1.5s-7.2 2.9-10.6 5.6-6.4 6.7-8.8 11.9-3.6 12-3.6 20.4l0 99.3-47 0 0-171.3 44.3 0 0 23.2 .7 0c6.2-8.9 13.7-15.7 22.3-20.5 8.7-4.9 18.7-7.3 30-7.3 10.8 0 20.7 2.1 29.6 6.3s15.7 11.6 20.4 22.2c5.1-7.5 12-14.1 20.7-19.8s19-8.6 30.9-8.6z"/></svg>
+            Join us on Matrix!
+        </a>
+
+        <div class="element-dropdown" id="elementDropdown">
+            <button class="element-dropdown-btn" onclick="document.getElementById('elementDropdown').classList.toggle('open')">
+                <img src="element-logo.png" alt="Element">
+                Open in Element
+                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="element-dropdown-options">
+                <a href="element://vector/webapp/#/room/%23inledgroup%3Amatrix.org?via=matrix.org">
+                    <img src="element-logo.png" alt="">
+                    <span>Open in Element App</span>
+                    <small>Desktop</small>
+                </a>
+                <a href="https://app.element.io/#/room/%23inledgroup%3Amatrix.org?via=matrix.org" target="_blank" rel="noopener">
+                    <img src="element-logo.png" alt="">
+                    <span>Open in Browser</span>
+                    <small>Web</small>
+                </a>
+            </div>
+        </div>
+
+        <a href="https://element.io/en/download" target="_blank" rel="noopener" class="btn btn-secondary">
+            <svg viewBox="0 0 448 512" fill="currentColor"><path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 210.7-41.4-41.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 242.7 256 32zM64 320c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-46.9 0-56.6 56.6c-31.2 31.2-81.9 31.2-113.1 0L110.9 320 64 320zm304 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>
+            Download Element (Official App)
+        </a>
+
+        <div class="divider"></div>
+
+        <div class="notice">
+            <div class="notice-title">Important Notice</div>
+            <p class="notice-text">
+                Our server contains multiple chat rooms. It has been reported that <strong>some unofficial Matrix clients</strong> (such as <strong>Fractal</strong>) may experience compatibility issues. If you encounter any problems, please report them. We recommend using <a href="https://element.io/en/download" target="_blank" rel="noopener">Element</a>, the official app.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
